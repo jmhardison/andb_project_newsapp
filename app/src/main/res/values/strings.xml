@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">andb_project_newsapp</string>
+    <string name="no_connection">No Internet Connection Detected.</string>
+    <string name="no_articles">No Articles Available.</string>
 </resources>
