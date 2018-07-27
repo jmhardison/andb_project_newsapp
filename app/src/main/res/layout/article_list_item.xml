@@ -5,40 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
-    android:paddingEnd="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingStart="16dp">
+    android:paddingEnd="@dimen/listItem_padding_general"
+    android:paddingLeft="@dimen/listItem_padding_general"
+    android:paddingRight="@dimen/listItem_padding_general"
+    android:paddingStart="@dimen/listItem_padding_general">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="@dimen/listItem_layoutZero"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/listItem_padding_general"
+        android:layout_marginStart="@dimen/listItem_padding_general"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/articletitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            tools:text="Article Title And Such" />
+            tools:text="Article Title And Such"
+            style="@style/listItem_Style1" />
         <TextView
             android:id="@+id/articlecategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
-            android:maxLines="1"
-            android:textAllCaps="true"
-            android:textColor="@color/colorAccent"
-            android:textSize="12sp"
-            tools:text="Category" />
+            tools:text="Category"
+            style="@style/listItem_Style2" />
 
     </LinearLayout>
 
@@ -46,27 +34,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/listItem_padding_general"
+        android:layout_marginStart="@dimen/listItem_padding_general"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/articledate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textColor="@color/colorAccent"
-            android:textSize="12sp"
-            tools:text="Jan 1, 2120" />
+            tools:text="Jan 1, 2120"
+            style="@style/listItem_style3" />
 
         <TextView
             android:id="@+id/articleauthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textColor="@color/colorAccent"
-            android:textSize="12sp"
-            tools:text="authorname" />
+            tools:text="authorname placeholder"
+            style="@style/listItem_Style4" />
 
 
     </LinearLayout>

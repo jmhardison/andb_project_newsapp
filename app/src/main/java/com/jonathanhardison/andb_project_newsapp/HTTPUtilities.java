@@ -1,6 +1,5 @@
 package com.jonathanhardison.andb_project_newsapp;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -16,7 +15,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public final class HTTPUtilities {
@@ -24,6 +22,11 @@ public final class HTTPUtilities {
 
     public HTTPUtilities(){}
 
+    /***
+     * Create URL object from string.
+     * @param stringUrl
+     * @return
+     */
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -34,8 +37,11 @@ public final class HTTPUtilities {
         return url;
     }
 
-    /**
-     * Make an HTTP request to the given URL and return a String as the response.
+    /***
+     * HTTP Request Operations
+     * @param url
+     * @return
+     * @throws IOException
      */
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
@@ -63,7 +69,8 @@ public final class HTTPUtilities {
                 Log.e(LOG_TAG,"Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            //catch exceptions and log
+            Log.e(LOG_TAG, "Problem retrieving the JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -76,9 +83,11 @@ public final class HTTPUtilities {
     }
 
 
-    /**
-     * Convert the {@link InputStream} into a String which contains the
-     * whole JSON response from the server.
+    /***
+     * read Stream and convert to String.
+     * @param inputStream
+     * @return
+     * @throws IOException
      */
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
@@ -95,27 +104,31 @@ public final class HTTPUtilities {
     }
 
 
-
-
-
-
-
+    /***
+     * extract articles from string and create array
+     * @param articleJSON
+     * @return
+     */
     public static ArrayList<NewsArticleType> extractArticles(String articleJSON) {
 
-
+        //create array
         ArrayList<NewsArticleType> newsArticles = new ArrayList<>();
 
 
         try {
+            //traverse the JSON object structure and pull relevent information.
+            //root
             JSONObject baseJsonResponse = new JSONObject(articleJSON);
+            //response
             JSONObject responseObject = baseJsonResponse.getJSONObject("response");
+            //results array
             JSONArray articleArray = responseObject.getJSONArray("results");
 
 
-
+            //for each object in array, pull information about article.
             for (int i = 0; i < articleArray.length(); i++) {
 
-
+                //current article object
                 JSONObject currentArticle = articleArray.getJSONObject(i);
 
                 String _title = currentArticle.getString("webTitle");
@@ -124,6 +137,7 @@ public final class HTTPUtilities {
                 String _webURL = currentArticle.getString("webUrl");
 
                 String _author = "";
+                //if there are "tags" pull it and look for contributor which is author.
                 if(currentArticle.has("tags")) {
                     JSONArray currentArticleTags = currentArticle.getJSONArray("tags");
                     for(int t = 0; t < currentArticleTags.length(); t++) {
@@ -137,8 +151,9 @@ public final class HTTPUtilities {
                     }
                 }
 
+                //create article object type
                 NewsArticleType article = new NewsArticleType(_title, _section, _author, _published, _webURL);
-
+                //add article
                 newsArticles.add(article);
             }
 
@@ -147,18 +162,17 @@ public final class HTTPUtilities {
             Log.e(LOG_TAG, "Problem parsing the articles JSON results", e);
         }
 
-        // Return the list of earthquakes
+        // Return the list
         return newsArticles;
     }
 
 
+    /***
+     * Fetch the articles and perform http requests.
+     * @param requestUrl
+     * @return
+     */
     public static List<NewsArticleType> fetchArticles(String requestUrl) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -170,8 +184,10 @@ public final class HTTPUtilities {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
+        //hold list from extracArticles method.
         List<NewsArticleType> newsArticles = extractArticles(jsonResponse);
 
+        //return the list
         return newsArticles;
     }
 

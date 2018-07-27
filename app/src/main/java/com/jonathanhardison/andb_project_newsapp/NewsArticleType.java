@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NewsArticleType {
+    private static final String LOG_TAG = "NEWSLOG";
     private String articleTitle;
     private String sectionName;
     private String author;
@@ -24,18 +25,20 @@ public class NewsArticleType {
      * @param inPublishedDate
      */
     public NewsArticleType(String inTitle, String inSectionName, String inAuthor,String inPublishedDate, String inWebURLForArticle) {
+
         articleTitle = inTitle;
         sectionName = inSectionName;
         author = inAuthor;
         webURLForArticle = inWebURLForArticle;
 
+        //check if published is not empty, then convert it to desired string date representation and store it.
         if(!TextUtils.isEmpty(inPublishedDate)) {
             try {
                 Date inputDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(inPublishedDate);
                 publishedDate = new SimpleDateFormat("LLL dd, yyyy").format(inputDate).toString();
             }
             catch (ParseException e){
-                Log.e("NEWSAPP", "Error parsing date field.", e);
+                Log.e(LOG_TAG, "Error parsing date field.", e);
             }
         }
         else

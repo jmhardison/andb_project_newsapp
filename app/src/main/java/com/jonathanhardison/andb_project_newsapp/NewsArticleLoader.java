@@ -8,16 +8,28 @@ import java.util.List;
 public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticleType>> {
     private String urlHold;
 
+    /***
+     * instance loader.
+     * @param context
+     * @param inUrl
+     */
     public NewsArticleLoader(Context context, String inUrl) {
         super(context);
         urlHold = inUrl;
     }
 
+    /***
+     * onStartLoading operations.
+     */
     @Override
     protected void onStartLoading() {
         forceLoad();
     }
 
+    /***
+     * Background loading operations.
+     * @return
+     */
     @Override
     public List<NewsArticleType> loadInBackground() {
         if (urlHold == null) {

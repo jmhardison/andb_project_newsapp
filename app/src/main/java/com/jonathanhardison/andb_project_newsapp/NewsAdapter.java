@@ -21,6 +21,13 @@ public class NewsAdapter extends ArrayAdapter<NewsArticleType> {
         super(context, 0, articles);
     }
 
+    /***
+     * getView method for filling screen data.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Check if there is an existing list item view (called convertView) that we can reuse,
@@ -31,17 +38,15 @@ public class NewsAdapter extends ArrayAdapter<NewsArticleType> {
                     R.layout.article_list_item, parent, false);
         }
 
-
+        //get current article
         NewsArticleType currentArticle = getItem(position);
 
-
+        //pull view references and set data.
         TextView articleTitleView = (TextView) listItemView.findViewById(R.id.articletitle);
         articleTitleView.setText(currentArticle.getArticleTitle());
 
-
         TextView articleCategoryView = (TextView) listItemView.findViewById(R.id.articlecategory);
         articleCategoryView.setText(currentArticle.getSectionName());
-
 
         TextView articleDateView = (TextView) listItemView.findViewById(R.id.articledate);
         articleDateView.setText(currentArticle.getPublishedDate());

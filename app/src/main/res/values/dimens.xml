@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="listItem_padding_general">16dp</dimen>
+    <dimen name="listItem_layoutZero">0dp</dimen>
+    <dimen name="listItem_textSizeTitle">16sp</dimen>
+    <dimen name="listItem_TextSizeGeneral">12sp</dimen>
+    <dimen name="mainAct_DividerHeight">0dp</dimen>
+</resources>
