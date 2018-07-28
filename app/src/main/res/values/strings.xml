@@ -2,4 +2,37 @@
     <string name="app_name">andb_project_newsapp</string>
     <string name="no_connection">No Internet Connection Detected.</string>
     <string name="no_articles">No Articles Available.</string>
+    <string name="settings_menuItem">Settings</string>
+    <string name="settings_title">NewsApp Settings</string>
+    <string name="settings_selected_category_label">Selected Category</string>
+    <string name="settings_selected_category_key" translatable="false">selectedCategory</string>
+    <string name="settings_selected_category_default" translatable="false">business</string>
+
+    <string name="settings_orderby_label">Order By</string>
+    <string name="settings_orderby_key" translatable="false">orderByCategory</string>
+    <string name="settings_orderby_default" translatable="false">newest</string>
+
+
+    <!-- Labels and data for category -->
+    <string name="settings_category_label_business">Business</string>
+    <string name="settings_category_value_business" translatable="false">business</string>
+
+    <string name="settings_category_label_books">Books</string>
+    <string name="settings_category_value_books" translatable="false">books</string>
+
+    <string name="settings_category_label_cities">Cities</string>
+    <string name="settings_category_value_cities" translatable="false">cities</string>
+
+    <string name="settings_category_label_education">Education</string>
+    <string name="settings_category_value_education" translatable="false">education</string>
+
+    <string name="settings_category_label_environment">Environment</string>
+    <string name="settings_category_value_environment" translatable="false">environment</string>
+
+    <string name="settings_orderby_label_newest">Newest</string>
+    <string name="settings_orderby_value_newest" translatable="false">newest</string>
+
+    <string name="settings_orderby_label_oldest">Oldest</string>
+    <string name="settings_orderby_value_oldest" translatable="false">oldest</string>
+
 </resources>

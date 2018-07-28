@@ -13,6 +13,16 @@ import java.util.List;
 public class NewsAdapter extends ArrayAdapter<NewsArticleType> {
 
     /***
+     * ViewHolder class to reduce view lookups.
+     */
+    static class ViewHolder {
+        private TextView articleTitleView;
+        private TextView articleCategoryView;
+        private TextView articleDateView;
+        private TextView articleAuthorView;
+    }
+
+    /***
      * instantiate
      * @param context
      * @param articles
@@ -30,29 +40,37 @@ public class NewsAdapter extends ArrayAdapter<NewsArticleType> {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        ViewHolder holder;
+
         // Check if there is an existing list item view (called convertView) that we can reuse,
         // otherwise, if convertView is null, then inflate a new list item layout.
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.article_list_item, parent, false);
+
+            holder = new ViewHolder();
+
+            holder.articleTitleView = listItemView.findViewById(R.id.articletitle);
+            holder.articleCategoryView = listItemView.findViewById(R.id.articlecategory);
+            holder.articleDateView = listItemView.findViewById(R.id.articledate);
+            holder.articleAuthorView = listItemView.findViewById(R.id.articleauthor);
+
+            listItemView.setTag(holder);
+        }
+        else{
+            holder = (ViewHolder) listItemView.getTag();
         }
 
         //get current article
         NewsArticleType currentArticle = getItem(position);
 
         //pull view references and set data.
-        TextView articleTitleView = (TextView) listItemView.findViewById(R.id.articletitle);
-        articleTitleView.setText(currentArticle.getArticleTitle());
-
-        TextView articleCategoryView = (TextView) listItemView.findViewById(R.id.articlecategory);
-        articleCategoryView.setText(currentArticle.getSectionName());
-
-        TextView articleDateView = (TextView) listItemView.findViewById(R.id.articledate);
-        articleDateView.setText(currentArticle.getPublishedDate());
-
-        TextView articleAuthorView = (TextView) listItemView.findViewById(R.id.articleauthor);
-        articleAuthorView.setText(currentArticle.getAuthor());
+        holder.articleTitleView.setText(currentArticle.getArticleTitle());
+        holder.articleCategoryView.setText(currentArticle.getSectionName());
+        holder.articleDateView.setText(currentArticle.getPublishedDate());
+        holder.articleAuthorView.setText(currentArticle.getAuthor());
 
         // Return the list item view that is now showing the appropriate data
         return listItemView;
